@@ -12,15 +12,12 @@ for file in $files; do
         backup_file=".$file.$(date +'%Y%m%d%H%M%S')"
         echo " - $(tput setaf 3)existing file found.$(tput sgr0)"
         echo "   backing up to $backup_file"
-        # TODO: 
-        # cp ~/.$file ~/$backup_file
-        # TODO:
-        # rm ~/.$file
+        cp ~/.$file ~/$backup_file
+        rm ~/.$file
     fi
     
     # Install the new dotfile by symlinking here
-    # TODO:
-    # ln -s ./$file ~/.$file
+    ln -s ./$file ~/.$file
     echo " - $(tput setaf 2)done.$(tput sgr0)"
 done
 echo
