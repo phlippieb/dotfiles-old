@@ -1,0 +1,56 @@
+[alias]
+	# One-letter shortcuts:
+	b = !git br | grep --color=always ^*
+	l = log --oneline -10
+	s = status --short
+	#
+	# Two-letter shortcuts:
+	br = branch
+	ch = checkout
+	cm = commit
+	cp = cherry-pick
+	df = diff --ignore-space-change
+	lg = log --graph --date=relative --pretty=format:'%s%n%C(dim white)%h %C(green)%ar %C(blue)%an%n%C(reset)'
+	ls = log --oneline`
+	pl = pull
+	st = status
+	#
+	# Three-letter shortcuts:
+	sub = submodule
+	#
+	# Git utils:
+	# Add all staged files (differs from `add .` in that unstaged files are left alone)
+	aa = add -u
+	# List all aliases
+	alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1 => \\2/' | sort
+	# Add the currently staged files to the last commit without editing the message
+	amend = !git log -n 1 --pretty=tformat:%s%n%n%b | git commit -F - --amend
+	# Diff, but showing entire files for context
+	fulldf = diff --no-prefix -U1000
+	# Add the given files to the .gitignore file
+	ignore = !([ ! -e .gitignore ] && touch .gitignore) | echo $1 >>.gitignore
+	# Clean up local branches that have been merged into the current branch
+	remove-merged-branches = !git branch --merged | grep -v \"\\*\" | grep -v master | grep -v dev | xargs -n 1 git branch -d
+	# Yolo
+	yolo = push --force
+	#
+	# Bash utils
+	cl = !clear
+	clear = !clear
+[push]
+	default = current
+[color "diff"]
+	commit = dim
+#
+# I use gitsh sometimes. These are my preferences:
+#
+[gitsh]
+	defaultCommand = s
+	prompt = "%D %c%b%#%w"
+[filter "lfs"]
+	smudge = git-lfs smudge %f
+	required = true
+	clean = git-lfs clean %f
+[gitsh "color"]
+	default = green
+	modified = magenta
